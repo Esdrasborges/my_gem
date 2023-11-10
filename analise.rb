@@ -1,12 +1,23 @@
 require 'csv'
+file_path = "C:\\Users\\esdras borges\\Desktop\\my_gem\\alunos.csv"
+arquivo_csv = "tabela.csv"
 
-file = CSV.read('C:\\Users\\esdras borges\\Desktop\\my_gem\\teste.csv')
-csv_file = "dados.csv"
-
-CSV.open(csv_file, "wb") do |csv|
-  file.each do |row|
-    csv << row
-  end
+CSV.open(arquivo_csv, "w") do |csv|
+    CSV.foreach(file_path) do |linha|
+        csv << linha
+    end
 end
 
-puts "Dados importados com sucesso para #{csv_file}"
+puts "Arquivo criado com sucesso!"
+
+idade = []
+    CSV.foreach(file_path) do |linha|
+        idade << [linha[2]]
+    end
+
+arquivo_idades = "idades.csv"
+CSV.open(arquivo_idades, "w") do |csv|
+   idade.each do |i|
+    csv << i
+   end
+end
